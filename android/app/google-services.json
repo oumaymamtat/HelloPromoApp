@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "653165810425",
+    "project_id": "hello-promo",
+    "storage_bucket": "hello-promo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653165810425:android:4cb1724f74627516158828",
+        "android_client_info": {
+          "package_name": "com.example.hello_promo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653165810425-5lr4oi04l3cm4r8g2mmtpiv30es7ovhp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHET9EG2P2ZA6DIM-mTeSDLV5CVQdjocw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653165810425-5lr4oi04l3cm4r8g2mmtpiv30es7ovhp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

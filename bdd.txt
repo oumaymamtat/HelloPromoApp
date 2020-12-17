@@ -1,0 +1,36 @@
+users: (user->product)
+id
+nom_user
+prenom
+email
+telephone
+password
+state
+image
+
+  product: (product ->magasin)
+id
+nom
+image
+prix_original
+prix_promo
+
+   category :
+id
+nom 
+image
+
+  magasin: 
+id
+nom_magazin
+adresse : tunis
+localisaztion : (adresse exacte)
+
+ category :
+id
+nom 
+image
+
+
+
+
