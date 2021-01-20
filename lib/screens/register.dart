@@ -17,14 +17,18 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Create Account",
-          style: TextStyle(fontSize: 28.0),
-        ),
-      ),
-      body: RegisterForm(),
-    );
+        body: Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("images/register.jpeg"), fit: BoxFit.cover)),
+      child: Container(
+          //    margin: EdgeInsets.fromLTRB(0, 50, 0, 50),
+          child: Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        //  elevation: 12,
+        child: RegisterForm(),
+      )),
+    ));
   }
 }
 
@@ -51,20 +55,21 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(10.0),
+    return Container(
+        padding: const EdgeInsets.fromLTRB(20, 30, 30, 10),
         child: Form(
             key: _registerForm,
-            child: Column(children: [
+            child: ListView(children: [
               // avatar to pick image
-              Align(
+              Container(
+                margin: const EdgeInsets.only(bottom: 15.0),
                 alignment: Alignment.center,
                 child: InkWell(
                   onTap: getImage,
                   child: CircleAvatar(
                     child: (_image == null)
                         ? Icon(
-                            Icons.person,
+                            Icons.image,
                             color: Colors.white,
                           )
                         : null,
@@ -76,78 +81,150 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
               ),
               // Name field
-              TextFormField(
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'You should enter your name';
-                    }
-                    return null;
-                  },
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.person),
-                    labelText: 'Name',
-                    hintText: 'Please enter your name',
-                  ),
-                  onSaved: (value) {
-                    user.name = value;
-                  }),
+              Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                height: 40.0,
+                child: TextFormField(
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'You should enter your name';
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: Colors.blue,
+                      ),
+                      labelText: 'Name',
+                      hintText: 'Please enter your name',
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    onSaved: (value) {
+                      user.name = value;
+                    }),
+              ),
+              Divider(
+                height: 10.0,
+              ),
               // email field
-              TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.email),
-                    labelText: 'Email',
-                    hintText: 'Please enter your email',
-                  ),
-                  validator: (value) => EmailValidator.validate(value)
-                      ? null
-                      : 'You should enter a valid email',
-                  onSaved: (value) {
-                    user.email = value;
-                  }),
+              Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                height: 40.0,
+                child: TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: Colors.blue,
+                      ),
+                      labelText: 'Email',
+                      hintText: 'Please enter your email',
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    validator: (value) => EmailValidator.validate(value)
+                        ? null
+                        : 'You should enter a valid email',
+                    onSaved: (value) {
+                      user.email = value;
+                    }),
+              ),
+              Divider(
+                height: 10.0,
+              ),
               // phone field
-              TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.phone),
-                    labelText: 'Phone',
-                    hintText: 'Please enter your phone',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'You should enter your phone';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    user.phone = value;
-                  }),
+              Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                height: 40.0,
+                child: TextFormField(
+                    //     keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.phone,
+                        color: Colors.blue,
+                      ),
+                      labelText: 'Phone',
+                      hintText: 'Please enter your phone',
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'You should enter your phone';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      user.phone = value;
+                    }),
+              ),
+              Divider(
+                height: 10.0,
+              ),
               // password field
-              TextFormField(
-                  validator: (value) {
-                    if (value.length < 1) {
-                      return 'Password should be minimum 1 character';
-                    }
-                    return null;
-                  },
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.lock),
-                    labelText: 'Password',
-                    hintText: 'Please enter your password',
-                  ),
-                  onSaved: (value) {
-                    user.password = value;
-                  }),
+              Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                height: 40.0,
+                child: TextFormField(
+                    validator: (value) {
+                      if (value.length < 1) {
+                        return 'Password should be minimum 1 character';
+                      }
+                      return null;
+                    },
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: Colors.blue,
+                      ),
+                      labelText: 'Password',
+                      hintText: 'Please enter your password',
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                    ),
+                    onSaved: (value) {
+                      user.password = value;
+                    }),
+              ),
+              Divider(
+                height: 3.0,
+              ),
               // register button
               Padding(
-                  padding: const EdgeInsets.fromLTRB(20.0, 10.0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 15.0, 0, 0),
                   child:
                       // We use buttonTheme to add height and width to register button
                       ButtonTheme(
-                          minWidth: 250.0,
-                          height: 45.0,
+                          minWidth: 150.0,
+                          height: 40.0,
                           child: RaisedButton(
                               // We use shape to give circular form to register button
                               shape: RoundedRectangleBorder(
@@ -167,13 +244,13 @@ class _RegisterFormState extends State<RegisterForm> {
                                   if (_image != null) {
                                     // give random numver as image location
                                     int randomNumber = Random().nextInt(100000);
-                                    user.imageLocation =
+                                    var imageLocation =
                                         'image$randomNumber.jpg';
                                     // create firebase storage instance
                                     final Reference storageReference =
                                         FirebaseStorage.instanceFor()
                                             .ref()
-                                            .child(user.imageLocation);
+                                            .child(imageLocation);
                                     // add image to firebase storage
                                     final UploadTask uploadTask =
                                         storageReference
@@ -181,7 +258,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     await uploadTask;
                                     final ref = FirebaseStorage.instanceFor()
                                         .ref()
-                                        .child(user.imageLocation);
+                                        .child(imageLocation);
                                     user.imageUrl = await ref.getDownloadURL();
                                   }
                                   //  add form fields to firebase firestore (cloud firestore)
@@ -194,8 +271,8 @@ class _RegisterFormState extends State<RegisterForm> {
                                     'phone': user.phone,
                                     'password': user.password,
                                     'imageUrl': user.imageUrl,
-                                    'imageLocation': user.imageLocation,
-                                    'state': 'false',
+                                    // 'imageLocation': imageLocation,
+                                    'state': false,
                                   });
                                   // inform user of successful register
                                   return showDialog<void>(
