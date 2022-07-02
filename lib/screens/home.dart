@@ -110,7 +110,9 @@ class _CategoriesGridState extends State<CategoriesGrid> {
                           Container(
                             height: 100,
                             margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: Image.network(data["imageUrl"]),
+                            child: data["imageUrl"] != null
+                                ? Image.network(data["imageUrl"])
+                                : null,
                           )
                         ],
                       )),

@@ -18,17 +18,19 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("images/register.jpeg"), fit: BoxFit.cover)),
-      child: Container(
-          //    margin: EdgeInsets.fromLTRB(0, 50, 0, 50),
-          child: Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        //  elevation: 12,
-        child: RegisterForm(),
-      )),
-    ));
+            height: 600,
+            padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("images/register.jpeg"),
+                    fit: BoxFit.cover)),
+            child: SingleChildScrollView(
+                child: Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              elevation: 12,
+              child: RegisterForm(),
+            ))));
   }
 }
 
@@ -56,10 +58,10 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.fromLTRB(20, 30, 30, 10),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
         child: Form(
             key: _registerForm,
-            child: ListView(children: [
+            child: Column(children: [
               // avatar to pick image
               Container(
                 margin: const EdgeInsets.only(bottom: 15.0),
@@ -275,7 +277,12 @@ class _RegisterFormState extends State<RegisterForm> {
                                     'state': false,
                                   });
                                   // inform user of successful register
-                                  return showDialog<void>(
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
+                                  /*   return showDialog<void>(
                                     context: context,
                                     barrierDismissible: false,
                                     builder: (BuildContext context) {
@@ -304,7 +311,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                         ],
                                       );
                                     },
-                                  );
+                                  );*/
                                 }
                               })))
             ])));

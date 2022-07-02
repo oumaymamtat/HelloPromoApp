@@ -6,6 +6,8 @@ import 'package:hello_promo/screens/register.dart';
 import 'package:hello_promo/screens/custom_widgets/app_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'dart:async';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -15,6 +17,23 @@ class _LoginState extends State<Login> {
   final _loginForm = GlobalKey<FormState>();
   User user = User();
   SharedPreferences logindata;
+
+  double _progress = 0;
+
+  void startTimer() {
+    new Timer.periodic(
+      Duration(seconds: 1),
+      (Timer timer) => setState(
+        () {
+          if (_progress == 1) {
+            timer.cancel();
+          } else {
+            _progress += 0.2;
+          }
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +87,7 @@ class _LoginState extends State<Login> {
                       TextFormField(
                           validator: (value) {
                             if (value.length < 1) {
-                              return 'Password should be minimum 1 character';
+                              return 'Please enter your password';
                             }
                             return null;
                           },
@@ -160,57 +179,32 @@ class _LoginState extends State<Login> {
                                           'state': true,
                                         });
                                         // inform user by successful login
-                                        return showDialog<void>(
-                                          context: context,
-                                          barrierDismissible: false,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: Text(
-                                                  'You are logged in successfully !'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                    child: Text('Go to home'),
-                                                    // navigate to home screen
-                                                    onPressed: () async {
-                                                      SharedPreferences
-                                                          logindata =
-                                                          await SharedPreferences
-                                                              .getInstance();
 
-                                                      logindata.setString(
-                                                          'id',
-                                                          documents
-                                                              .elementAt(0)
-                                                              .id);
+                                        SharedPreferences logindata =
+                                            await SharedPreferences
+                                                .getInstance();
 
-                                                      logindata.setBool(
-                                                          'state',
-                                                          documents
-                                                              .elementAt(0)
-                                                              .get('state'));
-                                                      logindata.setString(
-                                                          'name',
-                                                          documents
-                                                              .elementAt(0)
-                                                              .get('name'));
+                                        logindata.setString(
+                                            'id', documents.elementAt(0).id);
 
-                                                      logindata.setString(
-                                                          'imageUrl',
-                                                          documents
-                                                              .elementAt(0)
-                                                              .get('imageUrl'));
+                                        logindata.setBool(
+                                            'state',
+                                            documents
+                                                .elementAt(0)
+                                                .get('state'));
+                                        logindata.setString('name',
+                                            documents.elementAt(0).get('name'));
 
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      Home()));
-                                                    })
-                                              ],
-                                            );
-                                          },
-                                        );
+                                        logindata.setString(
+                                            'imageUrl',
+                                            documents
+                                                .elementAt(0)
+                                                .get('imageUrl'));
+
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Home()));
                                       } // if user does not exist
                                       else {
                                         print("username doesn't exist");

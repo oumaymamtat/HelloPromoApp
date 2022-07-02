@@ -51,8 +51,18 @@ class _MyAppBarState extends State<MyAppBar> {
                   setState(() {
                     state = false;
                   });
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                }
 
-                  return showDialog<void>(
+                /*  CircularProgressIndicator(
+                    strokeWidth: 10,
+                    backgroundColor: Colors.cyanAccent,
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                    //   value: _progress,
+                  );
+
+                    return showDialog<void>(
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context) {
@@ -71,8 +81,8 @@ class _MyAppBarState extends State<MyAppBar> {
                         ],
                       );
                     },
-                  );
-                })
+                  );*/
+                )
           ],
         );
       },
